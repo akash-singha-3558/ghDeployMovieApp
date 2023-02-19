@@ -16,12 +16,24 @@ import {
   import { AiOutlineDelete } from "react-icons/ai";
   import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
-const Watchlist = (data) => {
+const Watchlist = () => {
+  const [data,setData]=useState([]);
     const router=useRouter();
     const toast = useToast()
    const Reload=()=>{
     router.replace(router.asPath)
    }
+const getData=()=>{
+  axios.get(`https://mockserver-rny6.onrender.com/cart`).then((res)=>{
+    setData(res.data);
+  });
+
+}
+useEffect(()=>{
+ getData()
+    
+},[])
+
     const Delete=(id)=>{
 axios.delete(`https://mockserver-rny6.onrender.com/cart/${id}`).then((res)=>{
     
@@ -34,6 +46,7 @@ axios.delete(`https://mockserver-rny6.onrender.com/cart/${id}`).then((res)=>{
         duration: 3000,
         isClosable: true,
       })
+      getData()
     
 }).catch((er)=>{console.log(er)})
     }
@@ -53,7 +66,7 @@ axios.delete(`https://mockserver-rny6.onrender.com/cart/${id}`).then((res)=>{
       <Tbody>
         
        {
-        data.data?.map((el)=>(<Tr key={el.id}>
+        data?.map((el)=>(<Tr key={el.id}>
             <Td>{el.Title}</Td>
             <Td>{el.imdbRating}</Td>
             <Td>{el.Genre}</Td>
@@ -73,7 +86,7 @@ axios.delete(`https://mockserver-rny6.onrender.com/cart/${id}`).then((res)=>{
 
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     // Fetch data from external API
     let res= await axios.get(`https://mockserver-rny6.onrender.com/cart`);
     let data=res.data;

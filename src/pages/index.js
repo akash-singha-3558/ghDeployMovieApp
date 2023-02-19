@@ -1,4 +1,5 @@
-import Cards from '@/components/Cards'
+// import Cards from '@/components/Cards'
+import Cards from '@/components/cards';
 import { Box } from '@chakra-ui/react'
 import axios from 'axios'
 import Head from 'next/head'
