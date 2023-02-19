@@ -26,6 +26,7 @@ const Watchlist = () => {
 const getData=()=>{
   axios.get(`https://mockserver-rny6.onrender.com/cart`).then((res)=>{
     setData(res.data);
+  //  {ssd}
   });
 
 }
