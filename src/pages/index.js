@@ -8,7 +8,8 @@ import Head from 'next/head'
 
 
 export default function Home(data) {
-  console.log(data.data)
+  // console.log(data.data)
+  // asas
   return (
     <>
       <Head>
